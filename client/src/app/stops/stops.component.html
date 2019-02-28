@@ -1,0 +1,7 @@
+<h2>All Stops</h2>
+<ul class="stops">
+  <li *ngFor="let stop of stops">
+    <a routerLink="/stops/{{stop.id}}">
+    <span class="badge">{{stop.id}}</span> {{stop.name}} </a>
+  </li>
+</ul>

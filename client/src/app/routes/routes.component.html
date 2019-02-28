@@ -1,0 +1,7 @@
+<h2>All Routes</h2>
+<ul class="routes">
+  <li *ngFor="let route of routes">
+    <a routerLink="/routes/{{route.id}}">
+    <span class="badge">{{route.id}}</span> {{route.name}} </a>
+  </li>
+</ul>
