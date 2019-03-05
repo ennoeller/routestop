@@ -1,9 +1,11 @@
 package com.enno.server.stop;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StopRepository extends CrudRepository<Stop, Long> {
-	
+public interface StopRepository extends JpaRepository<Stop, Long> {
+	public List<Stop> findByRoutesId(Long routeId);
 }

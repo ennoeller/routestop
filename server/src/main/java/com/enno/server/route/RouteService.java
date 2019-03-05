@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.enno.server.stop.Stop;
+
 @Service
 public class RouteService {
 	
@@ -28,6 +30,13 @@ public class RouteService {
 	}
 	
 	public void updateRoute(Route route) {
+		routeRepository.save(route);
+	}
+	
+	// take Stop[] from old route and add it to updated route, otherwise new route will have no Stops
+	public void updateRoute(Route route, long id) {
+		Route oldRoute = this.getRoute(id).orElse(null);
+		route.setStop(oldRoute.getStop());
 		routeRepository.save(route);
 	}
 	

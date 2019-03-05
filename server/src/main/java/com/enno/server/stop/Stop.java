@@ -6,26 +6,25 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.enno.server.route.Route;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Stop {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long _id;
+	private Long id;
 	private int stopId;
 	private String name;
 	private String coordinates;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "route_stop", 
-		joinColumns = @JoinColumn(name = "route_id"), 
-		inverseJoinColumns = @JoinColumn(name = "stop_id"))
+	@JsonIgnore
+	@ManyToMany(mappedBy = "stops", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Route> routes = new ArrayList<>();
 
-	public Stop(Long _id, int stopId, String name, String coordinates, List<Route> routes) {
+	public Stop(Long id, int stopId, String name, String coordinates, List<Route> routes) {
 		super();
-		this._id = _id;
+		this.id = id;
 		this.stopId = stopId;
 		this.name = name;
 		this.coordinates = coordinates;
@@ -36,12 +35,12 @@ public class Stop {
 		super();
 	}
 
-	public Long get_id() {
-		return _id;
+	public Long getId() {
+		return id;
 	}
 
-	public void set_id(Long _id) {
-		this._id = _id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public int getStopId() {
@@ -60,14 +59,6 @@ public class Stop {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return coordinates;
-	}
-
-	public void setDescription(String description) {
-		this.coordinates = description;
-	}
-
 	public String getCoordinates() {
 		return coordinates;
 	}
@@ -82,5 +73,9 @@ public class Stop {
 
 	public void setRoutes(List<Route> routes) {
 		this.routes = routes;
+	}
+	
+	public void deleteRoute(Route route) {
+		this.routes.remove(route);
 	}
 }

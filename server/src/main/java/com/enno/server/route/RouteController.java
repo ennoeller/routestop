@@ -32,8 +32,8 @@ public class RouteController {
 	}
 
 	@RequestMapping(method=RequestMethod.PUT, value="/routes/{id}")
-	public void updateRoute(@RequestBody Route route) {
-		routeService.updateRoute(route);
+	public void updateRoute(@RequestBody Route route, @PathVariable long id) {
+		routeService.updateRoute(route, id);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/routes/{id}")
