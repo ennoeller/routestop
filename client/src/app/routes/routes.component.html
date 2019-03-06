@@ -1,7 +1,28 @@
+<h2>Add a Route</h2>
+<div>
+  <label>Name:
+    <input #name />
+  </label>
+  <label>Description:
+    <input #description />
+  </label>
+  <label>addDate
+    <input #addDate />
+  </label>
+  <label>(optional) Add stops to route, hold CTRL to select many
+    <select multiple [(ngModel)]="selectedValue">
+      <option *ngFor="let stop of stops" [ngValue]="stop">{{stop.name}}</option>
+    </select>
+  </label>
+  <button (click)="add(name.value, description.value, addDate.value, selectedValue)">Add Route</button>
+</div>
+
 <h2>All Routes</h2>
 <ul class="routes">
   <li *ngFor="let route of routes">
     <a routerLink="/routes/{{route.id}}">
-    <span class="badge">{{route.id}}</span> {{route.name}} </a>
+    <span class="badge"></span> {{route.name}} </a>
+    <button class="delete" title="delete route"
+      (click)="delete(route)">x</button>
   </li>
 </ul>

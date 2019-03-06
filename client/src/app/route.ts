@@ -1,7 +1,6 @@
-
 export class Route {
     id: number;
     name: string;
-    desc: string;
+    description: string;
     addDate: string;
 }

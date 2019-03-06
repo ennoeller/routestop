@@ -3,10 +3,16 @@
   <h2>{{stop.name | uppercase}} Details</h2>
   <div><span>id: </span>{{stop.id}}</div>
   <div>
+    <label>stopId:
+      <input [(ngModel)]="stop.stopId" placeholder="stopId">
+    </label>
     <label>name:
       <input [(ngModel)]="stop.name" placeholder="name">
     </label>
+    <label>coordinates:
+      <input [(ngModel)]="stop.coordinates" placeholder="coordinates">
+    </label>
   </div>
- 
 </div>
-<button (click)="goBack()">go back</button>
+<button (click)="updateStop()">Update</button>
+<button (click)="goBack()">Go Back</button>

@@ -29,8 +29,12 @@ export class StopDetailsComponent implements OnInit {
       .subscribe(stop => this.stop = stop);
   }
 
+  updateStop(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.stopService.updateStop(this.stop, id).subscribe(() => this.goBack());
+  }
+
   goBack(): void {
     this.location.back();
   }
-
 }
