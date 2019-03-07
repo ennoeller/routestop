@@ -38,8 +38,8 @@ public class StopController {
 	
 	// add a new stop
 	@RequestMapping(method=RequestMethod.POST, value="/stops")
-	public void addStop(@RequestBody Stop stop) {
-		stopService.addStop(stop);
+	public Stop addStop(@RequestBody Stop stop) {
+		return stopService.addStop(stop);
 	}
 
 	// update a stop
@@ -61,9 +61,9 @@ public class StopController {
 	}
 	
 	// add a stop to route
-	@RequestMapping(method=RequestMethod.POST, value = "/routes/{routeId}/stops/{stopId}")
-	public void addStopToRoute(@PathVariable long routeId, @PathVariable long stopId) {
-		stopService.addStopToRoute(routeId, stopId);
+	@RequestMapping(method=RequestMethod.POST, value = "/routes/{routeId}/stops")
+	public void addStopToRoute(@PathVariable long routeId, @RequestBody Stop[] stops) {
+		stopService.addStopToRoute(routeId, stops);
 	}
 	
 	// delete a stop from a route

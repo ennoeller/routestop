@@ -24,7 +24,7 @@ import { RouteDetailsComponent } from './route-details/route-details.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

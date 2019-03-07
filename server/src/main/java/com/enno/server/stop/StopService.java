@@ -29,8 +29,8 @@ public class StopService {
 		return stopRepository.findById(id);
 	}
 	
-	public void addStop(Stop stop) {
-		stopRepository.save(stop);
+	public Stop addStop(Stop stop) {
+		return stopRepository.save(stop);
 	}
 	
 	public void updateStop(Stop stop) {
@@ -49,10 +49,11 @@ public class StopService {
 		stopRepository.deleteById(id);
 	}
 	
-	public void addStopToRoute(long routeId, long stopId) {
+	public void addStopToRoute(long routeId, Stop[] stops) {
 		Route route = routeService.getRoute(routeId).orElse(null);
-		Stop stop = this.getStop(stopId).orElse(null);
-		route.addStop(stop);		
+		for (Stop stop : stops) {
+			route.addStop(stop);
+		}		
 		routeService.updateRoute(route);
 	}
 

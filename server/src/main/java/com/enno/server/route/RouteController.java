@@ -18,26 +18,31 @@ public class RouteController {
 	@Autowired
 	private RouteService routeService;
 	
+	// return all routes
 	@RequestMapping("/routes")
 	public List<Route> getRoutes() {
 		return routeService.getRoutes();
 	}
 	
+	// return a route with the given id
 	@RequestMapping("/routes/{id}")
 	public Optional<Route> getRoute(@PathVariable Long id) {
 		return routeService.getRoute(id);
 	}
 	
+	// add a route given the route body
 	@RequestMapping(method=RequestMethod.POST, value="/routes")
-	public void addRoute(@RequestBody Route route) {
-		routeService.addRoute(route);
+	public Route addRoute(@RequestBody Route route) {
+		return routeService.addRoute(route);
 	}
 
+	// update route given the route body and route id
 	@RequestMapping(method=RequestMethod.PUT, value="/routes/{id}")
 	public void updateRoute(@RequestBody Route route, @PathVariable long id) {
 		routeService.updateRoute(route, id);
 	}
 	
+	// delete route given the route id
 	@RequestMapping(method=RequestMethod.DELETE, value="/routes/{id}")
 	public void deleteRoute(@PathVariable Long id) {
 		routeService.deleteRoute(id);

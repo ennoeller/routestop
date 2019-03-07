@@ -28,12 +28,12 @@ export class RouteService {
   getRoute(id: number): Observable<Route> {
     const url = `${this.routesUrl}/${id}`;
     return this.http.get<Route>(url).pipe(
-    catchError(this.handleError<Route>(`getRoute id=${id}`))
+      catchError(this.handleError<Route>(`getRoute id=${id}`))
     );
   }
 
   // POST: add a new route to the server
-  addRoute (route: Route): Observable<Route> {
+  addRoute(route: Route): Observable<Route> {
     return this.http.post<Route>(this.routesUrl, route, httpOptions).pipe(
       catchError(this.handleError<Route>('addRoute'))
     );
@@ -48,14 +48,14 @@ export class RouteService {
   }
 
   // DELETE: delete the stop from the server
-  deleteRoute (route: Route | number): Observable<Route> {
+  deleteRoute(route: Route | number): Observable<Route> {
     const id = typeof route === 'number' ? route : route.id;
     const url = `${this.routesUrl}/${id}`;
 
     return this.http.delete<Route>(url, httpOptions).pipe(
       catchError(this.handleError<Route>('deleteRoute'))
     );
-}
+  }
 
   /**
   * Handle Http operation that failed.
@@ -63,13 +63,13 @@ export class RouteService {
   * @param operation - name of the operation that failed
   * @param result - optional value to return as the observable result
   */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
- 
-    console.error(error); // log to console
 
-    // Let the app keep running by returning an empty result.
-    return of(result as T);
-   };
+      console.error(error); // log to console
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }

@@ -1,5 +1,6 @@
+<!-- Edit stop details view. Don't load if no stop (*ngif) -->
 <div *ngIf="stop">
- 
+
   <h2>{{stop.name | uppercase}} Details</h2>
   <div><span>id: </span>{{stop.id}}</div>
   <div>

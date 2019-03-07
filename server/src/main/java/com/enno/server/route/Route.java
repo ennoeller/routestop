@@ -92,4 +92,9 @@ public class Route {
 	public void deleteStop(Stop stop) {
 		this.stops.remove(stop);
 	}
+
+	@Override
+	public String toString() {
+		return "Route [id=" + id + ", name=" + name + ", description=" + description + ", addDate=" + addDate + "]";
+	}	
 }

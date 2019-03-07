@@ -29,12 +29,12 @@ export class StopService {
   getStop(id: number): Observable<Stop> {
     const url = `${this.stopsUrl}/${id}`;
     return this.http.get<Stop>(url).pipe(
-    catchError(this.handleError<Stop>(`getStop id=${id}`))
+      catchError(this.handleError<Stop>(`getStop id=${id}`))
     );
   }
 
   // POST: add a new stop to the server
-  addStop (stop: Stop): Observable<Stop> {
+  addStop(stop: Stop): Observable<Stop> {
     return this.http.post<Stop>(this.stopsUrl, stop, httpOptions).pipe(
       catchError(this.handleError<Stop>('addStop'))
     );
@@ -49,7 +49,7 @@ export class StopService {
   }
 
   // DELETE: delete a stop from the server
-  deleteStop (stop: Stop | number): Observable<Stop> {
+  deleteStop(stop: Stop | number): Observable<Stop> {
     const id = typeof stop === 'number' ? stop : stop.id;
     const url = `${this.stopsUrl}/${id}`;
 
@@ -65,10 +65,19 @@ export class StopService {
       catchError(this.handleError('getStops', [])));
   }
 
+  // POST: add a stop to route
+  addStopToRoute(routeId: number, stops: Stop[]): Observable<Stop> {
+    const url = `${this.routesUrl}/${routeId}/stops`;
+    console.log(url);
+    console.log(stops);
+    return this.http.post<Stop>(url, stops, httpOptions).pipe(
+      catchError(this.handleError<Stop>('deleteStop'))
+    );
+  }
+
   // DELETE: delete a stop from route
   deleteStopFromRoute(routeId: number, stopId: number): Observable<Stop> {
     const url = `${this.routesUrl}/${routeId}/stops/${stopId}`;
-    console.log(url);
     return this.http.delete<Stop>(url, httpOptions).pipe(
       catchError(this.handleError<Stop>('deleteStop'))
     );
@@ -80,13 +89,13 @@ export class StopService {
   * @param operation - name of the operation that failed
   * @param result - optional value to return as the observable result
   */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
- 
-    console.error(error); // log to console
 
-    // Let the app keep running by returning an empty result.
-    return of(result as T);
-   };
+      console.error(error); // log to console
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }

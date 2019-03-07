@@ -1,38 +1,46 @@
 <div *ngIf="route">
- 
-    <h2>{{route.name | uppercase}} Details</h2>
-    <div><span>id: </span>{{route.id}}</div>
-    <div>
-      <label>name:
-        <input [(ngModel)]="route.name" placeholder="name">
-      </label>
-      <label>description:
-        <input [(ngModel)]="route.description" placeholder="description">
-      </label>
-      <label>addDate:
-        <input [(ngModel)]="route.addDate" placeholder="addDate">
-      </label>
-      <label>(optional) Add stops to route, hold CTRL to select many
-        <select multiple [(ngModel)]="selectedValue">
-          <option *ngFor="let stop of stops" [ngValue]="stop">{{stop.name}}</option>
-        </select>
-      </label>
-      <button (click)="add(name.value, description.value, addDate.value, selectedValue)">Add Route</button>
-    </div>
-   
 
-  <button (click)="updateRoute()">Update</button>
+  <!-- Update view -->
 
-  <h2>Stops on Route {{ route.name | uppercase }}</h2>
+  <h2>{{route.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{route.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="route.name" placeholder="name">
+    </label>
+    <label>description:
+      <input [(ngModel)]="route.description" placeholder="description">
+    </label>
+    <label>addDate:
+      <input [(ngModel)]="route.addDate" placeholder="addDate">
+    </label>
+    <button (click)="updateRoute()">Update</button>
+  </div>
 
-  <ul class="stops">
-    <li *ngFor="let stop of stops">
-      <a routerLink="/stops/{{stop.id}}">
-      <span class="badge"></span> {{stop.name}} </a>
-      <button class="delete" title="delete stop"
-        (click)="deleteStopFromRoute(stop)">x</button>
-    </li>
-  </ul>
+  <!-- Add stops to Route view -->
+
+  <div>
+    <h2>Add Stops to {{route.name | uppercase}}</h2>
+    <label>Add stops to route, hold CTRL to select many
+      <select multiple [(ngModel)]="selectedValue">
+        <option *ngFor="let stop of allStops" [ngValue]="stop">{{stop.name}}</option>
+      </select>
+    </label>
+    <button (click)="add(route.id, selectedValue)">Add Stop(s)</button>
+  </div>
+
+  <!-- Stops on Route View -->
+
+  <div>
+    <h2>Stops on Route {{ route.name | uppercase }}</h2>
+    <ul class="stops">
+      <li *ngFor="let stop of stops">
+        <a routerLink="/stops/{{stop.id}}">
+          <span class="badge"></span> {{stop.name}} </a>
+        <button class="delete" title="delete stop" (click)="deleteStopFromRoute(stop)">x</button>
+      </li>
+    </ul>
+  </div>
+
 </div>
-
-  <button (click)="goBack()">Go Back</button>
+<button (click)="goBack()">Go Back</button>

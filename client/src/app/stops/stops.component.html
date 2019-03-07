@@ -1,5 +1,7 @@
-<h2>Add a Stop</h2>
+<!-- Add stop view -->
+
 <div>
+  <h2>Add a Stop</h2>
   <label>StopId:
     <input #stopId />
   </label>
@@ -12,12 +14,15 @@
   <button (click)="add(stopId.value, name.value, coordinates.value)">Add Stop</button>
 </div>
 
-<h2>All Stops</h2>
-<ul class="stops">
-  <li *ngFor="let stop of stops">
-    <a routerLink="/stops/{{stop.id}}">
-    <span class="badge"></span> {{stop.name}} </a>
-    <button class="delete" title="delete stop"
-      (click)="delete(stop)">x</button>
-  </li>
-</ul>
+<!-- List of stops view -->
+
+<div>
+  <h2>All Stops</h2>
+  <ul class="stops">
+    <li *ngFor="let stop of stops">
+      <a routerLink="/stops/{{stop.id}}">
+        <span class="badge"></span> {{stop.name}} </a>
+      <button class="delete" title="delete stop" (click)="delete(stop)">x</button>
+    </li>
+  </ul>
+</div>

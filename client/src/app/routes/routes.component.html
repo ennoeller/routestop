@@ -1,3 +1,5 @@
+<!-- Add route veiw -->
+
 <h2>Add a Route</h2>
 <div>
   <label>Name:
@@ -17,12 +19,13 @@
   <button (click)="add(name.value, description.value, addDate.value, selectedValue)">Add Route</button>
 </div>
 
+<!-- All routes view -->
+
 <h2>All Routes</h2>
 <ul class="routes">
   <li *ngFor="let route of routes">
     <a routerLink="/routes/{{route.id}}">
-    <span class="badge"></span> {{route.name}} </a>
-    <button class="delete" title="delete route"
-      (click)="delete(route)">x</button>
+      <span class="badge"></span> {{route.name}} </a>
+    <button class="delete" title="delete route" (click)="delete(route)">x</button>
   </li>
 </ul>
